@@ -15,54 +15,42 @@ let SectionContent = props =>
   {props.children}
 </section>
 
-let ShiftButtons = props =>
-<div className="shift-btn">
-  <a href="" className="btn-prev disabled">Previous</a>
-  <a href="" className="btn-next">Next</a>
-</div>
+// let ShiftButtons = props =>
+// <div className="shift-btn">
+//   <a href="" className="btn-prev disabled">Previous</a>
+//   <a href="" className="btn-next">Next</a>
+// </div>
 
 let ListNews = props =>
 <>
   <ul className="list-news">
     <li className="item-news">
-      <a href="/article" className="link-news">
         <div className="content-news">
-          <img src="../images/news-item-1.png" alt="news" className="img-news"/>
           <p className="title-news">You Can Now Get Your Whole Genome Sequenced for Less Than an iPhone</p>
           <span className="date-news">01.01.1970</span>
           <a href="/article" className="read-news">Read more</a>
         </div>
-      </a>
     </li>
     <li className="item-news">
-      <a href="/article" className="link-news">
         <div className="content-news">
-          <img src="../images/news-item-2.png" alt="news" className="img-news"/>
-          <p className="title-news">But will people buy it — and is all that genetic information actually worth it?</p>
+          <p className="title-news">You Can Now Get Your Whole Genome Sequenced for Less Than an iPhone</p>
           <span className="date-news">01.01.1970</span>
           <a href="/article" className="read-news">Read more</a>
         </div>
-      </a>
     </li>
     <li className="item-news">
-      <a href="/article" className="link-news">
         <div className="content-news">
-          <img src="../images/news-item-1.png" alt="news" className="img-news"/>
-          <p className="title-news">Managing Chronic Illness in the Workplace</p>
+          <p className="title-news">You Can Now Get Your Whole Genome Sequenced for Less Than an iPhone</p>
           <span className="date-news">01.01.1970</span>
           <a href="/article" className="read-news">Read more</a>
         </div>
-      </a>
     </li>
     <li className="item-news">
-      <a href="/article" className="link-news">
         <div className="content-news">
-          <img src="../images/news-item-2.png" alt="news" className="img-news"/>
-          <p className="title-news">You read a lot. We like that.</p>
+          <p className="title-news">You Can Now Get Your Whole Genome Sequenced for Less Than an iPhone</p>
           <span className="date-news">01.01.1970</span>
           <a href="/article" className="read-news">Read more</a>
         </div>
-      </a>
     </li>
   </ul>
   {props.children}
@@ -87,7 +75,7 @@ let HomePage = props =>
       <ListNews/>
       <Sidebar/>
     </SectionContent>
-    <ShiftButtons/>
+    {/* <ShiftButtons/> */}
   </Container>
 </Main>
 

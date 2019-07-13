@@ -1,7 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Router, Route, Link, Switch, Redirect} from 'react-router-dom';
+import {Provider, connect} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
 import createHistory from "history/createBrowserHistory";
 import { GraphQLClient} from 'graphql-request';
 
@@ -19,12 +20,13 @@ import TermPage from './components/Term.js';
 import PageNotFound from './components/PageNotFound.js';
 import CategoriesPage from './components/Categories.js';
 
-const gql = new GraphQLClient("http://localhost:4000/graphql", {headers: {} });
+const gql = new GraphQLClient("/graphql", {headers: {} });
 
 let Wrapper = props =>
 <div className="wrapper">
   {props.children}
 </div>
+
 
 function App() {
   return (
@@ -32,7 +34,7 @@ function App() {
     <Wrapper>
       <HeaderComponent/>
       <Router history={createHistory()}>
-        <div class="content">
+        <div className="content">
           <Switch>
             <Route path="/" component={HomePage} exact/>
             <Route path="/categories" component={CategoriesPage}/>

@@ -13,9 +13,9 @@ let Main = props =>
 
 let SocialLinks = props =>
 <ul className="social-links">
-  <li className="social-item"><a href="https://www.facebook.com/" className="social-link facebook" target="_blank">Facebook</a></li>
-  <li className="social-item"><a href="https://www.twitter.com/" className="social-link twitter" target="_blank">Twitter</a></li>
-  <li className="social-item"><a href="https://www.instagram.com/" className="social-link instagram" target="_blank">Instagram</a></li>
+  <li className="social-item"><a href="https://www.facebook.com/" className="social-link facebook" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+  <li className="social-item"><a href="https://www.twitter.com/" className="social-link twitter" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+  <li className="social-item"><a href="https://www.instagram.com/" className="social-link instagram" target="_blank" rel="noopener noreferrer">Instagram</a></li>
 </ul>
 
 
@@ -23,7 +23,7 @@ let Article = props =>
 <article className="article">
   <div className="article-content">
     <h2 className="article-title">How I Created My Happiest Life</h2>
-    <span className="article-theme"><a href="">Trips</a></span>
+    <span className="article-theme"><a href="/article">Trips</a></span>
     <span className="article-date">01.01.1970</span>
     {/* <img src="../images/news-item-1.png" alt="article-photo" className="article-img"/> */}
     <p className="article-inner-content">
@@ -108,7 +108,7 @@ let Comment = props =>
       Using flexbox for a sticky footer not only doesn't require any extra elements, but allows 
       for a variable height footer.
     </p>
-    <span className="reply"><a href="" className="reply-link">Reply</a></span>
+    <span className="reply"><a href="/reply" className="reply-link">Reply</a></span>
     <div className="card-comment">
       <p className="user-name">John Doe</p>
       <p className="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
@@ -125,11 +125,10 @@ let Comment = props =>
     </div>
   </div>
   <div className="card-user">
-    <img className="img-user" src="" alt=""/>
     <p className="user-name">John Doe</p>
     <p className="message">Use this CSS3 box shadow generator to quickly generate box shadow CSS for your project.
     </p>
-    <span className="reply"><a href="" className="reply-link">Reply</a></span>
+    <span className="reply"><a href="/reply" className="reply-link">Reply</a></span>
   </div>
 </section>
 

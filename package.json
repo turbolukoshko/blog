@@ -6,6 +6,7 @@
     "express-graphql": "^0.8.0",
     "graphql": "^14.4.2",
     "graphql-request": "^1.8.2",
+    "proxy": "http://localhost:4000",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",

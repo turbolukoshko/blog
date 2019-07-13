@@ -14,7 +14,7 @@ let RegisterPage = props =>
       <span className="register-password-requirement">Minimum length is 8 characters</span>
       <label htmlFor="register-agreement">
         <input type="checkbox" id="register-agreement" className="register-agreement"/>
-          I accept the <a href="">Term and conditions</a>
+          I accept the <a href="/term">Term and conditions</a>
       </label>
       <button type="submit" className="btn-register">Confirm</button>
     </div>
