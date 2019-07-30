@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 class NewsList extends React.Component {
   render() { 
+    console.log(this.props);
     return(
         <ul className="list-news">
           {this.props.posts && this.props.posts.map(post =>
@@ -12,9 +13,9 @@ class NewsList extends React.Component {
                 <a href={`/article/${post.id}`} className="news-link">{post.title}</a>
               </h3>
               <p>{post.text}</p>
-              <span>{`post #${post.id}`}</span>
+              <span className="date-news">{`post #${post.id}`}</span>
               <br/>
-              <span className="date-news">{post.age}</span>
+              <span className="date-news">added: {post.age}</span>
             </div>
           </li>).reverse()}
         </ul>

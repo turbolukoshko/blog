@@ -1,26 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
-
 class Article extends React.Component {
   render(){
+    console.log(this.props);
     return(
       <article className="article">
-        {this.props.posts && this.props.posts.map(post =>
-                <div className="article-content" key={post.id}>
-                    <h2 className="article-title">
-                      {post.title}
-                    </h2>
-                    <p>{post.text}</p>
-                </div>)}
+        <div className="article-content">
+          <h2 className="article-title">{this.props.post && this.props.post.title}</h2>
+          <h2 className="date-news">Article #{this.props.post && this.props.post.id}</h2>
+          <p>{this.props.post && this.props.post.text}</p>
+        </div>
       </article>
     );
   }
 }
 
-export const mapStateToProps = (state) => {
-  return {
-    posts: state.posts.payload && state.posts.payload.posts
-  }
-}
-
-export default connect(mapStateToProps)(Article);
+export default Article;

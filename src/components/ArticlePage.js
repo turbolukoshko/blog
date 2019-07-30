@@ -1,8 +1,9 @@
 import React from 'react';
 import Article from './Article';
-import RecomendedNews from './RecomendedNews';
 import Comments from './Comments';
-import FormComment from './FormComment';
+import CreateComment from './CreateComment';
+import { graphqlGetPostThunk, graphqlGetCommentsThunk, graphqlGetSubCommentThunk} from '../App';
+import { connect } from 'react-redux';
 
 let Container = props =>
 <div className="container">
@@ -14,16 +15,40 @@ let Main = props =>
   {props.children}
 </main>
 
-let ArticlePage = props =>
-<>
-<Main>
-  <Container>
-    <Article/>
-    <RecomendedNews/>
-    <Comments/>
-    <FormComment/>
-  </Container>
-</Main>
-</>
+class ArticlePage extends React.Component {
 
-export default ArticlePage;
+  componentDidMount(){
+ 
+    this.props.loadingData(this.props.match.params.id);
+    this.props.loadingComments(this.props.match.params.id);
+    this.props.loadingSubComment(this.props.match.params.id);
+
+  }
+
+  render(){   console.log(this.props)
+    return(
+    <>
+      <Main>
+        <Container>
+          <Article post={this.props.post}/>
+          <Comments comments={this.props.comments}/>
+          <CreateComment postId={this.props.match.params.id}/>
+        </Container>
+      </Main>
+    </>
+    );
+  }
+}
+
+let mapStateToProps = (state) => ({
+  post:  state.post && state.post.payload && state.post.payload.post,
+  comments : state.comments && state.comments.payload && state.comments.payload.comments
+})
+
+let mapDispatchToProps = {
+  loadingData: graphqlGetPostThunk,
+  loadingComments: graphqlGetCommentsThunk,
+  loadingSubComment: graphqlGetSubCommentThunk
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlePage);

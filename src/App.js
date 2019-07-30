@@ -5,7 +5,7 @@ import {Provider, connect} from 'react-redux';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import createHistory from "history/createBrowserHistory";
 import thunk from 'redux-thunk';
-import { GraphQLClient } from 'graphql-request'
+import { GraphQLClient } from 'graphql-request';
 
 import HeaderComponent from './components/Header.js';
 import HomePage from './components/Home.js';
@@ -19,7 +19,6 @@ import PasswordResetPage from './components/PasswordReset.js';
 import PrivacyPage from './components/Privacy.js';
 import TermPage from './components/Term.js';
 import PageNotFound from './components/PageNotFound.js';
-import CategoriesPage from './components/Categories.js';
 
 import {promiseReducer} from './components/store/reducers';
 import {promiseActionsMaker} from './components/store/actions';
@@ -46,20 +45,8 @@ let graphqlPostThunk = () => promiseActionsMaker('posts',
   `
 ));
 
-function graphqlOnePostThunk(id){
-  return promiseActionsMaker('post',
-  gql.request(`
-    query post($postID:Int!){
-      post(id:$postID){
-        id, title, text, age
-      }
-    }
-    `, (id)
-  )
-);
-}
-
-function graphqlNewPostThunk(title, text){
+export function graphqlNewPostThunk(title, text){
+  // console.log('iii');
   return dispatch => {
     dispatch(promiseActionsMaker('newpost', 
       gql.request(`
@@ -70,25 +57,62 @@ function graphqlNewPostThunk(title, text){
             }
           }`
       , {title, text})
+        .then(() => dispatch(graphqlPostThunk()()))
     )())
-   // console.log('iii?')
-    setTimeout(() =>dispatch(graphqlPostThunk()()), 2000)
+  //  console.log('iii?')
+    // setTimeout(() =>dispatch(graphqlPostThunk()()), 2000)
   }
 }
 
-let FormCreatePost = (p) => {
-  let [title, setTitle] = useState('')
-  let [text, setText]   = useState('')
-  return (
-      <div>
-          <input value={title} placeholder="Title" onChange={e => setTitle(e.target.value)}/><br/>
-          <textarea placeholder="Text" onChange={e => setText(e.target.value)}>{text}</textarea>
-          <button onClick={() => p.onPost(title, text)}>Create Post</button>
-      </div>
-  )
+export function graphqlCreateCommentThunk(postID, text){
+  return dispatch => {
+    dispatch(promiseActionsMaker('newcomment',
+      gql.request(`
+      mutation createComment($postID:Int!, $text:String!) {
+        createComment(postID: $postID, text: $text) {     
+            text
+        }
+      }`, {postID, text})
+      .then(() => dispatch(graphqlGetCommentsThunk(postID)))
+    )())
+  } 
 }
 
-let WrapperForm = connect(null, {onPost: graphqlNewPostThunk})(FormCreatePost);
+export function graphqlGetPostThunk(postID = 1){
+  return promiseActionsMaker('post', 
+    gql.request(`
+      query post($postID:Int!){
+        post(id:$postID){
+          id, title, text, age
+        }
+      }`, {postID}
+    )
+  )();
+}
+
+export function graphqlGetCommentsThunk(postID){
+  return promiseActionsMaker('comments', 
+    gql.request(`
+      query getComments($postID: Int!){
+        comments(id:$postID){
+          id,text
+        }
+      }`, {postID}
+    )
+  )();
+} 
+
+export function graphqlGetSubCommentThunk(commentId) {
+  return promiseActionsMaker('subcomment',
+    gql.request(`
+    query getSubComments($commentId: Int!){
+      subComments(id:$commentId){
+        id,text
+      }
+    }`, {commentId}
+    )
+  )();
+} 
 
 store.dispatch(graphqlPostThunk()());
 
@@ -97,13 +121,11 @@ function App() {
     <Provider store={store}>
     <Wrapper>
       <HeaderComponent/>
-      <WrapperForm/>
       <Router history={createHistory()}>
         <div className="content">
           <Switch>
-            <Route path="/" component={HomePage} exact/>
-            <Route path="/categories" component={CategoriesPage}/>
-            <Route path="/article" component={ArticlePage}/>
+            <Route path="/" component={HomePage} exact/>            
+            <Route path="/article/:id" component={ArticlePage}/>
             <Route path="/register" component={RegisterPage}/>
             <Route path="/sign-in" component={SignInPage}/>
             <Route path="/password-reset" component={PasswordResetPage}/>
@@ -123,3 +145,28 @@ function App() {
 }
 
 export default App;
+
+// function graphqlGetPostThunk(postId) {
+//   return promiseActionsMaker('post',
+//   gql.request(`
+//   query post($postID:Int!){
+//     post(id:$postID){
+//       id, title, text	  , age
+//     }
+//   }`
+//   ))
+// }
+
+// let FormCreatePost = (p) => {
+//   let [title, setTitle] = useState('')
+//   let [text, setText]   = useState('')
+//   return (
+//       <div>
+//           <input value={title} placeholder="Title" onChange={e => setTitle(e.target.value)}/><br/>
+//           <textarea placeholder="Text" onChange={e => setText(e.target.value)}>{text}</textarea>
+//           <button onClick={() => p.onPost(title, text)}>Create Post</button>
+//       </div>
+//   )
+// }
+
+// let WrapperForm = connect(null, {onPost: graphqlNewPostThunk})(FormCreatePost);

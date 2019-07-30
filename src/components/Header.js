@@ -3,15 +3,15 @@ import Navigation from './Navigation';
 import Logo from './Logo';
 import UserBlock from './UserBlock';
 
-let Container = props =>
-<div className="container">
-  {props.children}
-</div>
-
 let Header = props =>
 <header className="header">
   {props.children}
 </header>
+
+let Container = props =>
+<div className="container">
+  {props.children}
+</div>
 
 let HeaderComponent = props =>
 
