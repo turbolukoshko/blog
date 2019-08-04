@@ -1,4 +1,4 @@
-﻿GraphQL Backend - http://gitlab.a-level.com.ua/gitgod/sequelize This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+﻿## GraphQL Backend http://gitlab.a-level.com.ua/gitgod/sequelize. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
