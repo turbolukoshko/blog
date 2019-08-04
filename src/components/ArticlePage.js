@@ -2,13 +2,9 @@ import React from 'react';
 import Article from './Article';
 import Comments from './Comments';
 import CreateComment from './CreateComment';
+import RecomendedNews from './RecomendedNews';
 import { graphqlGetPostThunk, graphqlGetCommentsThunk, graphqlGetSubCommentThunk} from '../App';
 import { connect } from 'react-redux';
-
-let Container = props =>
-<div className="container">
-  {props.children}
-</div>
 
 let Main = props =>
 <main className="main">
@@ -29,11 +25,11 @@ class ArticlePage extends React.Component {
     return(
     <>
       <Main>
-        <Container>
-          <Article post={this.props.post}/>
-          <Comments comments={this.props.comments}/>
-          <CreateComment postId={this.props.match.params.id}/>
-        </Container>
+          <Article post={this.props.post}></Article>
+          <RecomendedNews posts={this.props.posts}/>
+          <Comments comments={this.props.comments}>
+            <CreateComment postId={this.props.match.params.id}/>
+          </Comments>
       </Main>
     </>
     );
@@ -42,7 +38,8 @@ class ArticlePage extends React.Component {
 
 let mapStateToProps = (state) => ({
   post:  state.post && state.post.payload && state.post.payload.post,
-  comments : state.comments && state.comments.payload && state.comments.payload.comments
+  comments : state.comments && state.comments.payload && state.comments.payload.comments,
+  posts: state.posts.payload && state.posts.payload.posts
 })
 
 let mapDispatchToProps = {

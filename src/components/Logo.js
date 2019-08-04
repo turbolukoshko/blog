@@ -4,7 +4,8 @@ import Hamburger from './Hamburger-menu';
 let Logo = props =>
 <div className="logo">
 <Hamburger/>
-  <h1 className="title-logo"><span className="logo-icon"></span><a href="/" className="title-link">The Blog</a></h1>
+  <a href="/" className="home"><img src="/images/home.png" alt="home" className="home-icon"/></a>
+  <img src="/images/tea.png" alt="logo" className="logo-icon"/>
 </div>
 
 export default Logo;

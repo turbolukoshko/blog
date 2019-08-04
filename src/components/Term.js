@@ -1,15 +1,9 @@
 import React from 'react';
 
-let Container = props =>
-<div className="container">
-  {props.children}
-</div>
-
 let TermPage = props =>
 <section className="section-privacy">
-  <Container>
-    <h2 className="privacy-title">Terms of Use</h2>
-    <p className="privacy-content">
+  <h2 className="privacy__title">Terms of Use</h2>
+  <p className="privacy__content">
     The following terms and conditions govern all use of the website, or 
     any other website owned and operated which incorporate these terms and conditions) 
     (the “Website”), including all content, services and support packages provided on via the Website. 
@@ -23,8 +17,7 @@ let TermPage = props =>
     or use any of the services. If these terms and conditions are considered an offer, 
     acceptance is expressly limited to these terms. The Website is available only to individuals who 
     are at least 13 years old.
-    </p>
-  </Container>
+  </p>
 </section>
 
 export default TermPage;

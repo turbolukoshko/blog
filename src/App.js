@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import {Router, Route, Link, Switch, Redirect} from 'react-router-dom';
-import {Provider, connect} from 'react-redux';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {Router, Route, Switch} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 import createHistory from "history/createBrowserHistory";
 import thunk from 'redux-thunk';
 import { GraphQLClient } from 'graphql-request';
@@ -145,28 +145,3 @@ function App() {
 }
 
 export default App;
-
-// function graphqlGetPostThunk(postId) {
-//   return promiseActionsMaker('post',
-//   gql.request(`
-//   query post($postID:Int!){
-//     post(id:$postID){
-//       id, title, text	  , age
-//     }
-//   }`
-//   ))
-// }
-
-// let FormCreatePost = (p) => {
-//   let [title, setTitle] = useState('')
-//   let [text, setText]   = useState('')
-//   return (
-//       <div>
-//           <input value={title} placeholder="Title" onChange={e => setTitle(e.target.value)}/><br/>
-//           <textarea placeholder="Text" onChange={e => setText(e.target.value)}>{text}</textarea>
-//           <button onClick={() => p.onPost(title, text)}>Create Post</button>
-//       </div>
-//   )
-// }
-
-// let WrapperForm = connect(null, {onPost: graphqlNewPostThunk})(FormCreatePost);
